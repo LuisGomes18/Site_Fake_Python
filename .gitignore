@@ -1,0 +1,5 @@
+.venv
+.vscode
+*.txt
+!requirements.txt
+a
