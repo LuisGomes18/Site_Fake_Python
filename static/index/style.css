@@ -1,6 +1,8 @@
 :root {
     --primary: rgb(84, 84, 214);
     --secundary: rgb(255, 255, 255);
+    --primary_button: rgb(207, 204, 204);
+    --secundary_button: rgb(0, 0, 0);
 }
 
 html,
@@ -37,7 +39,16 @@ body {
 
 .texto_engenharia {
     top: 40px;
-    left: 35px;
+    left: 55px;
     width: 600px;
     font-size: 18px;
+}
+
+a {
+    background: var(--primary_button);
+    color: var(--secundary_button);
+    padding: 15px 12px;
+    border: 1px solid black;
+    text-decoration: none;
+    border-radius: 15px;
 }
