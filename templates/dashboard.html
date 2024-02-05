@@ -4,11 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index/style.css') }}">
     <title>Document</title>
 </head>
 
 <body>
-    <p>Dashboard</p>
+    <main>
+        <h1>Ocorreu um erro na sua requisição</h1>
+    </main>
+    <aside>
+        <a href="{{ url_for('index') }}" class="button">Voltar ao inicio</a>
+    </aside>
 </body>
 
 </html>
